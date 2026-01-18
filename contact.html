@@ -7,38 +7,32 @@
     <style>
         body { font-family: sans-serif; padding: 40px 20px; background: #f4f4f9; color: #333; }
         form { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #27ae60; }
-        label { display: block; font-size: 14px; margin: 15px 0 5px; }
+        h2 { text-align: center; color: #27ae60; margin-bottom: 25px; }
+        label { display: block; font-size: 14px; color: #555; margin: 15px 0 5px; }
         input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 14px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button { width: 100%; padding: 14px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
         button:hover { background: #219150; }
     </style>
 </head>
 <body>
+
     <form action="https://formsubmit.co/melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
         <h2>Get in Touch</h2>
         
-        <label>Your Name *</label>
         <input type="text" name="name" placeholder="Your Name" required>
-        
-        <label>Your Email Address *</label>
         <input type="email" name="email" placeholder="Your Email Address" required>
-        
-        <label>Phone Number</label>
         <input type="tel" name="phone" placeholder="Phone Number">
-        
-        <label>Message *</label>
         <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
         
         <label>Attach an image (Max 5MB):</label>
         <input type="file" name="attachment" accept="image/*">
-        
+
         <input type="hidden" name="_next" value="https://melipil5780-afk.github.io/quotes/thanks.html">
-        <input type="hidden" name="_subject" value="New Inquiry from Therapy Quotes Site">
+        
         <input type="hidden" name="_captcha" value="false">
         
         <button type="submit">Send Message</button>
-        <p style="text-align:center;"><a href="index.html" style="color:#777; text-decoration:none;">← Back to Quotes</a></p>
     </form>
+
 </body>
 </html>
