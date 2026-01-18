@@ -4,34 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: sans-serif; padding: 40px 20px; background: #f4f4f9; color: #333; }
-        form { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #27ae60; margin-bottom: 25px; }
-        label { display: block; font-size: 14px; color: #555; margin: 15px 0 5px; }
-        input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 14px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button:hover { background: #219150; }
+        /* 1. ELEGANT BACKGROUND */
+        body { 
+            font-family: 'Lato', sans-serif; 
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fdfbf7 0%, #e8f5e9 100%); /* Soft cream to mint gradient */
+            color: #4a4a4a;
+        }
+
+        /* 2. THE CARD DESIGN */
+        form { 
+            width: 100%;
+            max-width: 480px; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Deep, soft shadow */
+            border-top: 6px solid #27ae60; /* Professional green accent top */
+            margin: 20px;
+        }
+
+        /* 3. TYPOGRAPHY */
+        h2 { 
+            text-align: center; 
+            color: #2c3e50; 
+            font-family: 'Playfair Display', serif; /* Fancy font for header */
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        p.subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* 4. MODERN INPUT FIELDS */
+        label { 
+            display: block; 
+            font-size: 13px; 
+            font-weight: bold;
+            color: #666; 
+            margin-bottom: 8px; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        input, textarea { 
+            width: 100%; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border: 2px solid #f0f0f0; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        /* Input Glow Effect */
+        input:focus, textarea:focus { 
+            border-color: #27ae60; 
+            background: white;
+            outline: none;
+            box-shadow: 0 0 8px rgba(39, 174, 96, 0.2);
+        }
+
+        /* 5. THE BUTTON */
+        button { 
+            width: 100%; 
+            padding: 16px; 
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 18px; 
+            font-weight: bold; 
+            transition: transform 0.2s, background 0.3s;
+            letter-spacing: 1px;
+        }
+
+        button:hover { 
+            background: #219150; 
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        /* File Upload Styling */
+        input[type="file"] {
+            padding: 10px;
+            background: white;
+            border: 1px dashed #ccc;
+        }
+
+        /* Link back home */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover { color: #27ae60; }
+
+        /* Mobile tweaks */
+        @media (max-width: 600px) {
+            form { padding: 25px; margin: 15px; }
+            h2 { font-size: 26px; }
+        }
     </style>
 </head>
 <body>
 
     <form action="https://formsubmit.co/melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
         <h2>Get in Touch</h2>
+        <p class="subtitle">Have a favorite quote? Send it our way.</p>
         
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email Address" required>
-        <input type="tel" name="phone" placeholder="Phone Number">
-        <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
+        <label>Name</label>
+        <input type="text" name="name" placeholder="John Doe" required>
         
-        <label>Attach an image (Max 5MB):</label>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="john@example.com" required>
+        
+        <label>Phone (Optional)</label>
+        <input type="tel" name="phone" placeholder="(123) 456-7890">
+        
+        <label>Message</label>
+        <textarea name="message" placeholder="How can we help?" rows="4" required></textarea>
+        
+        <label>Attach an Image (Max 5MB)</label>
         <input type="file" name="attachment" accept="image/*">
 
         <input type="hidden" name="_next" value="https://melipil5780-afk.github.io/quotes/thanks.html">
-        
+        <input type="hidden" name="_url" value="https://melipil5780-afk.github.io/quotes/">
+        <input type="hidden" name="_subject" value="New Quote Submission">
         <input type="hidden" name="_captcha" value="false">
         
         <button type="submit">Send Message</button>
+
+        <a href="index.html" class="back-link">← Back to Gallery</a>
     </form>
 
 </body>
