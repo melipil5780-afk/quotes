@@ -1,134 +1,298 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Therapist Quotes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insightful Voices | Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Georgia', serif; background: #fdfcf0; padding: 40px 20px; color: #2c3e50; }
-        h1 { text-align: center; color: #2c3e50; margin-bottom: 40px; }
+        /* 1. CALMING BACKGROUND */
+        body { 
+            font-family: 'Lato', sans-serif; 
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fdfbf7 0%, #e8f5e9 100%); 
+            color: #2c3e50;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #1a252f;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 2. THE GALLERY GRID */
         .gallery { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 40px; 
             max-width: 1200px; 
             margin: 0 auto; 
+            padding: 0 20px 60px 20px;
         }
+
+        /* 3. LUXURY CARD DESIGN */
         .card { 
             background: white; 
-            padding: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            padding: 0; /* Removing padding to let image fill the top */
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
             text-align: center; 
-            transition: transform 0.2s;
+            overflow: hidden; /* Clips the image to the border radius */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
         }
-        .card:hover { transform: translateY(-5px); }
-        img { 
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card img { 
             width: 100%; 
-            height: 250px; 
+            height: 280px; 
             object-fit: cover; 
-            border-radius: 5px; 
-            margin-bottom: 15px;
-            filter: grayscale(20%); /* Adds a classy vintage look */
+            filter: sepia(20%) contrast(1.1); /* Adds a warm, classic feel */
         }
-        p { font-size: 1.1em; line-height: 1.5; font-style: italic; margin-bottom: 15px; }
-        strong { display: block; color: #8e44ad; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .btn { 
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card p { 
+            font-size: 1.15rem; 
+            line-height: 1.6; 
+            font-style: italic; 
+            margin-bottom: 20px; 
+            color: #34495e;
+            position: relative;
+        }
+
+        /* Decorative Quote Mark */
+        .card p::before {
+            content: "“";
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #27ae60;
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .card strong { 
             display: block; 
-            width: 200px; 
-            margin: 60px auto; 
-            padding: 15px; 
+            color: #27ae60; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* 4. THE ACTION BUTTON */
+        .footer-cta {
+            text-align: center;
+            padding-bottom: 80px;
+        }
+
+        .btn { 
+            display: inline-block; 
+            padding: 18px 40px; 
             background: #27ae60; 
             color: white; 
             text-align: center; 
             text-decoration: none; 
-            border-radius: 5px; 
+            border-radius: 50px; 
             font-weight: bold;
-            font-family: sans-serif;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2);
+            transition: all 0.3s ease;
         }
-        .btn:hover { background: #219150; }
+
+        .btn:hover { 
+            background: #219150; 
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(39, 174, 96, 0.3);
+        }
+
+        /* Responsive Mobile tweaks */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .gallery { gap: 25px; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Insightful Voices</h1>
+    <header>
+        <h1>Insightful Voices</h1>
+        <p class="subtitle">Exploring the depths of the human psyche through the words of master therapists and pioneers.</p>
+    </header>
     
     <div class="gallery">
 
         <div class="card">
             <img src="images/freud.jpg" alt="Sigmund Freud">
-            <p>"Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways."</p>
-            <strong>- Sigmund Freud</strong>
+            <div class="card-content">
+                <p>Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways.</p>
+                <strong>Sigmund Freud</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/greenberg.jpg" alt="Leslie Greenberg">
-            <p>"You cannot leave a place you have never been. You must arrive at your pain before you can leave it."</p>
-            <strong>- Leslie Greenberg</strong>
+            <div class="card-content">
+                <p>You cannot leave a place you have never been. You must arrive at your pain before you can leave it.</p>
+                <strong>Leslie Greenberg</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/kernberg.jpg" alt="Otto Kernberg">
-            <p>"The integration of love and hatred is the prerequisite for the capacity to love deeply."</p>
-            <strong>- Otto Kernberg</strong>
+            <div class="card-content">
+                <p>The integration of love and hatred is the prerequisite for the capacity to love deeply.</p>
+                <strong>Otto Kernberg</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/moreno.jpg" alt="Jacob L. Moreno">
-            <p>"I shall take your eyes out and place them into mine, and you shall take my eyes out and place them into yours, that I may see you with your eyes and you may see me with mine."</p>
-            <strong>- Jacob L. Moreno</strong>
+            <div class="card-content">
+                <p>I shall take your eyes out and place them into mine... that I may see you with your eyes.</p>
+                <strong>Jacob L. Moreno</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/fonagy.jpg" alt="Peter Fonagy">
-            <p>"Mentalization is the ability to see ourselves from the outside and others from the inside."</p>
-            <strong>- Peter Fonagy</strong>
+            <div class="card-content">
+                <p>Mentalization is the ability to see ourselves from the outside and others from the inside.</p>
+                <strong>Peter Fonagy</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/kauth.jpg" alt="Bill Kauth">
-            <p>"We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth."</p>
-            <strong>- Bill Kauth</strong>
+            <div class="card-content">
+                <p>We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth.</p>
+                <strong>Bill Kauth</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/elliott.jpg" alt="Robert Elliott">
-            <p>"Empathy is the oxygen of the therapeutic relationship."</p>
-            <strong>- Robert Elliott</strong>
+            <div class="card-content">
+                <p>Empathy is the oxygen of the therapeutic relationship.</p>
+                <strong>Robert Elliott</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/goldman.jpg" alt="Rhonda Goldman">
-            <p>"Emotions tell us what is important to us. They are the compass for our needs."</p>
-            <strong>- Rhonda Goldman</strong>
+            <div class="card-content">
+                <p>Emotions tell us what is important to us. They are the compass for our needs.</p>
+                <strong>Rhonda Goldman</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/bly.jpg" alt="Robert Bly">
-            <p>"Where a man's wound is, that is where his genius will be found."</p>
-            <strong>- Robert Bly</strong>
+            <div class="card-content">
+                <p>Where a man's wound is, that is where his genius will be found.</p>
+                <strong>Robert Bly</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/jung.jpg" alt="Carl Jung">
-            <p>"Until you make the unconscious conscious, it will direct your life and you will call it fate."</p>
-            <strong>- Carl Jung</strong>
+            <div class="card-content">
+                <p>Until you make the unconscious conscious, it will direct your life and you will call it fate.</p>
+                <strong>Carl Jung</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/tosi.jpg" alt="Rich Tosi">
-            <p>"There is a gold mine in the shadow. Your power lies in the parts of yourself you have rejected."</p>
-            <strong>- Rich Tosi</strong>
+            <div class="card-content">
+                <p>There is a gold mine in the shadow. Your power lies in the parts of yourself you have rejected.</p>
+                <strong>Rich Tosi</strong>
+            </div>
         </div>
 
         <div class="card">
             <img src="images/hering.jpg" alt="Ron Hering">
-            <p>"To speak your truth cleanly, without blame or judgment, is the act of a warrior."</p>
-            <strong>- Ron Hering</strong>
+            <div class="card-content">
+                <p>To speak your truth cleanly, without blame or judgment, is the act of a warrior.</p>
+                <strong>Ron Hering</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/frankl.jpg" alt="Viktor Frankl">
+            <div class="card-content">
+                <p>When we are no longer able to change a situation, we are challenged to change ourselves.</p>
+                <strong>Viktor Frankl</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/frischling.jpg" alt="Simcha Frischling">
+            <div class="card-content">
+                <p>The shofar is a wake-up call to the soul. Are you living your truth or hiding?</p>
+                <strong>Simcha Frischling</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/buber.jpg" alt="Martin Buber">
+            <div class="card-content">
+                <p>Through the 'Thou', a person becomes 'I'. All real living is meeting.</p>
+                <strong>Martin Buber</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/shedler.jpg" alt="Jonathan Shedler">
+            <div class="card-content">
+                <p>The goal of therapy is not just to feel better, it is to expand the freedom to think, feel, and live.</p>
+                <strong>Jonathan Shedler</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/mcwilliams.jpg" alt="Nancy McWilliams">
+            <div class="card-content">
+                <p>Mental health is the presence of vitality and the capacity to love, work, and play.</p>
+                <strong>Nancy McWilliams</strong>
+            </div>
         </div>
 
     </div>
 
-    <a href="contact.html" class="btn">Send a Message</a>
+    <div class="footer-cta">
+        <a href="contact.html" class="btn">Send a Message</a>
+    </div>
 
 </body>
 </html>
