@@ -3,22 +3,132 @@
 <head>
     <title>Therapist Quotes</title>
     <style>
-        body { font-family: serif; background: #fdfcf0; padding: 20px; color: #2c3e50; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        img { width: 100%; border-radius: 5px; height: 300px; object-fit: cover; }
-        .btn { display: block; width: 200px; margin: 40px auto; padding: 15px; background: #8e44ad; color: white; text-align: center; text-decoration: none; border-radius: 5px; }
+        body { font-family: 'Georgia', serif; background: #fdfcf0; padding: 40px 20px; color: #2c3e50; }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 40px; }
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            text-align: center; 
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            margin-bottom: 15px;
+            filter: grayscale(20%); /* Adds a classy vintage look */
+        }
+        p { font-size: 1.1em; line-height: 1.5; font-style: italic; margin-bottom: 15px; }
+        strong { display: block; color: #8e44ad; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .btn { 
+            display: block; 
+            width: 200px; 
+            margin: 60px auto; 
+            padding: 15px; 
+            background: #27ae60; 
+            color: white; 
+            text-align: center; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold;
+            font-family: sans-serif;
+        }
+        .btn:hover { background: #219150; }
     </style>
 </head>
 <body>
+
     <h1>Insightful Voices</h1>
+    
     <div class="gallery">
+
         <div class="card">
             <img src="images/freud.jpg" alt="Sigmund Freud">
-            <p><i>"Out of your vulnerabilities will come your strength."</i></p>
+            <p>"Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways."</p>
             <strong>- Sigmund Freud</strong>
         </div>
+
+        <div class="card">
+            <img src="images/greenberg.jpg" alt="Leslie Greenberg">
+            <p>"You cannot leave a place you have never been. You must arrive at your pain before you can leave it."</p>
+            <strong>- Leslie Greenberg</strong>
         </div>
+
+        <div class="card">
+            <img src="images/kernberg.jpg" alt="Otto Kernberg">
+            <p>"The integration of love and hatred is the prerequisite for the capacity to love deeply."</p>
+            <strong>- Otto Kernberg</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/moreno.jpg" alt="Jacob L. Moreno">
+            <p>"I shall take your eyes out and place them into mine, and you shall take my eyes out and place them into yours, that I may see you with your eyes and you may see me with mine."</p>
+            <strong>- Jacob L. Moreno</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/fonagy.jpg" alt="Peter Fonagy">
+            <p>"Mentalization is the ability to see ourselves from the outside and others from the inside."</p>
+            <strong>- Peter Fonagy</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/kauth.jpg" alt="Bill Kauth">
+            <p>"We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth."</p>
+            <strong>- Bill Kauth</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/elliott.jpg" alt="Robert Elliott">
+            <p>"Empathy is the oxygen of the therapeutic relationship."</p>
+            <strong>- Robert Elliott</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/goldman.jpg" alt="Rhonda Goldman">
+            <p>"Emotions tell us what is important to us. They are the compass for our needs."</p>
+            <strong>- Rhonda Goldman</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/bly.jpg" alt="Robert Bly">
+            <p>"Where a man's wound is, that is where his genius will be found."</p>
+            <strong>- Robert Bly</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/jung.jpg" alt="Carl Jung">
+            <p>"Until you make the unconscious conscious, it will direct your life and you will call it fate."</p>
+            <strong>- Carl Jung</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/tosi.jpg" alt="Rich Tosi">
+            <p>"There is a gold mine in the shadow. Your power lies in the parts of yourself you have rejected."</p>
+            <strong>- Rich Tosi</strong>
+        </div>
+
+        <div class="card">
+            <img src="images/hering.jpg" alt="Ron Hering">
+            <p>"To speak your truth cleanly, without blame or judgment, is the act of a warrior."</p>
+            <strong>- Ron Hering</strong>
+        </div>
+
+    </div>
+
     <a href="contact.html" class="btn">Send a Message</a>
+
 </body>
 </html>
