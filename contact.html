@@ -4,26 +4,28 @@
     <title>Contact Us</title>
     <style>
         body { font-family: sans-serif; padding: 50px; background: #f4f4f9; }
-        form { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 10px; }
-        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; }
-        button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; cursor: pointer; }
+        form { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #219150; }
+        label { font-size: 14px; color: #666; }
     </style>
 </head>
 <body>
     <form action="https://formsubmit.co/Melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
         <h2>Get in Touch</h2>
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
+        
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email Address" required>
         <input type="tel" name="phone" placeholder="Phone Number">
-        <textarea name="message" placeholder="Message" rows="5" required></textarea>
+        <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
         
         <label>Attach an image (Max 5MB):</label>
         <input type="file" name="attachment" accept="image/*">
 
-        <input type="hidden" name="_next" value="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/thanks.html">
-        <input type="hidden" name="_subject" value="New Quote Website Message!">
-        
-        <button type="submit">Send Message</button>
+        <input type="hidden" name="_next" value="https://Melipil.github.io/my-quotes/thanks.html">
+        <input type="hidden" name="_subject" value="New Website Inquiry!">
+        <input type="hidden" name="_captcha" value="false"> <button type="submit">Send Message</button>
     </form>
 </body>
 </html>
