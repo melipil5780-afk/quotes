@@ -1,162 +1,187 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Contact | Insightful Voices</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* 1. ELEGANT BACKGROUND */
+        /* 1. DEEP, MOODY BACKGROUND */
         body { 
-            font-family: 'Lato', sans-serif; 
+            font-family: 'Inter', sans-serif; 
             margin: 0;
-            padding: 0;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #fdfbf7 0%, #e8f5e9 100%); /* Soft cream to mint gradient */
-            color: #4a4a4a;
+            background-color: #1a1a1a; /* Dark charcoal */
+            background-image: radial-gradient(circle at center, #2c2c2c 0%, #121212 100%);
+            color: #e0e0e0;
+            padding: 20px;
         }
 
-        /* 2. THE CARD DESIGN */
-        form { 
+        /* 2. THE FLOATING CARD */
+        .container {
             width: 100%;
-            max-width: 480px; 
-            background: white; 
-            padding: 40px; 
-            border-radius: 15px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Deep, soft shadow */
-            border-top: 6px solid #27ae60; /* Professional green accent top */
-            margin: 20px;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr; /* Split layout */
+            background: #222;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* 3. TYPOGRAPHY */
-        h2 { 
-            text-align: center; 
-            color: #2c3e50; 
-            font-family: 'Playfair Display', serif; /* Fancy font for header */
+        /* 3. LEFT SIDE: THE TEXT */
+        .info-sidebar {
+            background: #27ae60; /* Professional Green */
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-sidebar h2 {
+            font-family: 'Playfair Display', serif;
             font-size: 32px;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        
-        p.subtitle {
-            text-align: center;
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 15px;
+            margin-bottom: 20px;
         }
 
-        /* 4. MODERN INPUT FIELDS */
+        .info-sidebar p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* 4. RIGHT SIDE: THE FORM */
+        form { 
+            padding: 50px; 
+            background: #ffffff;
+            color: #333;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
         label { 
             display: block; 
-            font-size: 13px; 
-            font-weight: bold;
-            color: #666; 
+            font-size: 12px; 
+            font-weight: 700;
+            color: #888; 
             margin-bottom: 8px; 
-            letter-spacing: 0.5px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         input, textarea { 
             width: 100%; 
-            padding: 15px; 
-            margin-bottom: 20px; 
-            border: 2px solid #f0f0f0; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
+            padding: 12px 0; 
+            margin-bottom: 30px; 
+            border: none;
+            border-bottom: 2px solid #eee;
+            background: transparent;
             font-size: 16px;
-            font-family: 'Lato', sans-serif;
-            background: #fafafa;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s;
         }
 
-        /* Input Glow Effect */
         input:focus, textarea:focus { 
-            border-color: #27ae60; 
-            background: white;
             outline: none;
-            box-shadow: 0 0 8px rgba(39, 174, 96, 0.2);
+            border-bottom-color: #27ae60;
+        }
+
+        /* File Upload Styling */
+        .file-upload {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            margin-bottom: 30px;
         }
 
         /* 5. THE BUTTON */
         button { 
             width: 100%; 
-            padding: 16px; 
-            background: #27ae60; 
+            padding: 18px; 
+            background: #1a1a1a;
             color: white; 
             border: none; 
-            border-radius: 8px; 
+            border-radius: 4px; 
             cursor: pointer; 
-            font-size: 18px; 
-            font-weight: bold; 
-            transition: transform 0.2s, background 0.3s;
-            letter-spacing: 1px;
+            font-size: 14px; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
         }
 
         button:hover { 
-            background: #219150; 
-            transform: translateY(-2px); /* Slight lift on hover */
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            background: #27ae60; 
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
         }
 
-        /* File Upload Styling */
-        input[type="file"] {
-            padding: 10px;
-            background: white;
-            border: 1px dashed #ccc;
-        }
-
-        /* Link back home */
-        .back-link {
+        .back-home {
             display: block;
+            margin-top: 25px;
             text-align: center;
-            margin-top: 20px;
-            color: #999;
             text-decoration: none;
-            font-size: 14px;
+            color: #888;
+            font-size: 13px;
         }
-        .back-link:hover { color: #27ae60; }
 
-        /* Mobile tweaks */
-        @media (max-width: 600px) {
-            form { padding: 25px; margin: 15px; }
-            h2 { font-size: 26px; }
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .info-sidebar { padding: 30px; text-align: center; }
+            form { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <form action="https://formsubmit.co/melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
-        <h2>Get in Touch</h2>
-        <p class="subtitle">Have a favorite quote? Send it our way.</p>
-        
-        <label>Name</label>
-        <input type="text" name="name" placeholder="John Doe" required>
-        
-        <label>Email</label>
-        <input type="email" name="email" placeholder="john@example.com" required>
-        
-        <label>Phone (Optional)</label>
-        <input type="tel" name="phone" placeholder="(123) 456-7890">
-        
-        <label>Message</label>
-        <textarea name="message" placeholder="How can we help?" rows="4" required></textarea>
-        
-        <label>Attach an Image (Max 5MB)</label>
-        <input type="file" name="attachment" accept="image/*">
+    <div class="container">
+        <div class="info-sidebar">
+            <h2>The Unspoken</h2>
+            <p>"All real living is meeting."</p>
+            <p style="font-size: 14px; margin-top: 10px;">— Martin Buber</p>
+            <div style="margin-top: 40px; font-size: 14px; opacity: 0.8;">
+                Reach out to share a quote, a thought, or a piece of your own symphony.
+            </div>
+        </div>
 
-        <input type="hidden" name="_next" value="https://melipil5780-afk.github.io/quotes/thanks.html">
-        <input type="hidden" name="_url" value="https://melipil5780-afk.github.io/quotes/">
-        <input type="hidden" name="_subject" value="New Quote Submission">
-        <input type="hidden" name="_captcha" value="false">
-        
-        <button type="submit">Send Message</button>
+        <form action="https://formsubmit.co/melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
+            <h3>Send a Message</h3>
+            
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+            
+            <label>Email Address</label>
+            <input type="email" name="email" required>
+            
+            <label>Your Message</label>
+            <textarea name="message" rows="3" required></textarea>
+            
+            <div class="file-upload">
+                <label>Attach a Document or Image</label>
+                <input type="file" name="attachment" accept="image/*" style="border:none; margin-bottom:0;">
+            </div>
 
-        <a href="index.html" class="back-link">← Back to Gallery</a>
-    </form>
+            <input type="hidden" name="_next" value="https://melipil5780-afk.github.io/quotes/thanks.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Insight from Website">
+
+            <button type="submit">Submit Inquiry</button>
+
+            <a href="index.html" class="back-home">Return to the Gallery</a>
+        </form>
+    </div>
 
 </body>
 </html>
