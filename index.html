@@ -1,248 +1,803 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoes of the Psyche | Clinical Quote List</title>
+    <title>Echoes of the Psyche | Clinical Quote Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Playfair Display', serif;
-            line-height: 1.6;
-            color: #e0e0e0;
-            background-color: #0a0a0a;
-        }
 
-        /* --- Background Layers --- */
-        .background-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background-image: url('https://googleusercontent.com/image_generation_content/0'); 
-            background-size: cover;
-            background-position: center;
-        }
+```
+    body {
+        font-family: 'Playfair Display', serif;
+        line-height: 1.6;
+        color: #e0e0e0;
+        background-color: #0a0a0a;
+        overflow-x: hidden;
+    }
 
-        .background-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.9), rgba(5, 5, 5, 0.98));
-            backdrop-filter: blur(5px);
-        }
+    /* --- Animated Background Layers --- */
+    .background-container {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -2;
+        background: radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                    linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+        animation: bgShift 20s ease infinite;
+    }
 
-        /* --- Sidebar Navigation --- */
+    @keyframes bgShift {
+        0%, 100% { filter: hue-rotate(0deg); }
+        50% { filter: hue-rotate(10deg); }
+    }
+
+    .background-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+        background: linear-gradient(to bottom, rgba(15, 15, 15, 0.85), rgba(5, 5, 5, 0.95));
+        backdrop-filter: blur(8px);
+    }
+
+    /* Floating particles effect */
+    .particle {
+        position: fixed;
+        width: 2px;
+        height: 2px;
+        background: rgba(255, 215, 0, 0.3);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: -1;
+        animation: float 15s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+    }
+
+    /* --- Enhanced Sidebar Navigation --- */
+    nav {
+        position: fixed;
+        left: 20px; top: 50%;
+        transform: translateY(-50%);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background: rgba(10, 10, 10, 0.85);
+        padding: 25px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    nav:hover {
+        background: rgba(10, 10, 10, 0.95);
+        border-color: rgba(255, 215, 0, 0.4);
+    }
+
+    nav a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        transition: all 0.3s ease;
+        padding: 10px 16px;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    nav a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: #ffd700;
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+
+    nav a:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(5px);
+    }
+
+    nav a:hover::before {
+        transform: scaleY(1);
+    }
+
+    nav a.active {
+        color: #ffd700;
+        background: rgba(255, 215, 0, 0.15);
+        font-weight: 700;
+    }
+
+    nav a.active::before {
+        transform: scaleY(1);
+    }
+
+    /* Scroll progress indicator */
+    .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(90deg, #ffd700, #ffed4e);
+        z-index: 1000;
+        transition: width 0.1s ease;
+    }
+
+    /* --- Contact Button - Fixed Bottom Right --- */
+    .contact-btn-fixed {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 999;
+        background: linear-gradient(135deg, #ffd700, #ffed4e);
+        color: #000;
+        padding: 16px 32px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-btn-fixed::before {
+        content: '✉';
+        font-size: 1.2rem;
+    }
+
+    .contact-btn-fixed:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 12px 40px rgba(255, 215, 0, 0.6);
+        background: linear-gradient(135deg, #ffed4e, #ffd700);
+    }
+
+    .contact-btn-fixed:active {
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    /* --- Main Layout --- */
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 30px 120px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 80px;
+        animation: fadeInDown 1s ease;
+    }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 3.2rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 15px;
+        text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        position: relative;
+        display: inline-block;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    }
+
+    .subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        color: rgba(255, 215, 0, 0.6);
+        text-transform: uppercase;
+        margin-bottom: 40px;
+    }
+
+    .search-container {
+        position: relative;
+        max-width: 550px;
+        margin: 0 auto 30px;
+    }
+
+    #searchInput {
+        width: 100%;
+        padding: 18px 50px 18px 25px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1.5px solid rgba(255, 215, 0, 0.25);
+        border-radius: 50px;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    #searchInput:focus {
+        border-color: #ffd700;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+    }
+
+    #searchInput::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 215, 0, 0.5);
+        pointer-events: none;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        background: transparent;
+        border: 1.5px solid #ffd700;
+        color: #ffd700;
+        padding: 14px 30px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 50px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: #ffd700;
+        transform: translate(-50%, -50%);
+        transition: width 0.4s ease, height 0.4s ease;
+        z-index: -1;
+    }
+
+    .btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn:hover {
+        color: #000;
+        border-color: #ffd700;
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    }
+
+    /* --- Enhanced Quotes Section --- */
+    section {
+        margin-bottom: 120px;
+        scroll-margin-top: 100px;
+        animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #ffd700;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        margin-bottom: 50px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 20px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+    }
+
+    .quote-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+        padding: 50px;
+        margin-bottom: 40px;
+        border-left: 3px solid #ffd700;
+        border-radius: 0 12px 12px 0;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quote-card::before {
+        content: '"';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 6rem;
+        color: rgba(255, 215, 0, 0.1);
+        font-family: 'Playfair Display', serif;
+        line-height: 1;
+    }
+
+    .quote-card:hover {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+        transform: translateX(10px);
+        border-left-width: 5px;
+        box-shadow: -10px 10px 40px rgba(255, 215, 0, 0.1);
+    }
+
+    .quote-text {
+        font-size: 1.5rem;
+        font-style: italic;
+        margin-bottom: 30px;
+        color: #fff;
+        line-height: 1.7;
+        position: relative;
+        z-index: 1;
+    }
+
+    .quote-author {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: rgba(255, 215, 0, 0.85);
+        letter-spacing: 3px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quote-author::before {
+        content: '—';
+        color: rgba(255, 215, 0, 0.5);
+    }
+
+    /* Back to top button */
+    .back-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: rgba(10, 10, 10, 0.9);
+        border: 2px solid rgba(255, 215, 0, 0.5);
+        border-radius: 50%;
+        color: #ffd700;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: all 0.3s ease;
+        z-index: 99;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .back-to-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+        background: rgba(255, 215, 0, 0.1);
+        border-color: #ffd700;
+        box-shadow: 0 6px 30px rgba(255, 215, 0, 0.3);
+        transform: translateY(-5px);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1100px) {
         nav {
             position: fixed;
-            left: 20px; top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 20px 10px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            backdrop-filter: blur(15px);
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: none;
+            flex-direction: row;
+            overflow-x: auto;
+            width: 100%;
+            border-radius: 0;
+            padding: 12px 15px;
+            background: rgba(10, 10, 10, 0.98);
+            height: auto;
+            align-items: center;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-        nav a {
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
+        nav a::before { display: none; }
+        nav a:hover { transform: translateX(0) translateY(-2px); }
+        
+        .container { padding-top: 100px; }
+        h1 { font-size: 2.2rem; letter-spacing: 0.2em; }
+        .quote-card { padding: 35px 25px; }
+        .quote-text { font-size: 1.2rem; }
+
+        .contact-btn-fixed {
+            bottom: 20px;
+            right: 20px;
+            padding: 14px 24px;
+            font-size: 0.7rem;
+        }
+
+        .back-to-top {
+            bottom: 85px;
+            right: 20px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        h1 { font-size: 1.8rem; }
+        .quote-text { font-size: 1.1rem; }
+        
+        .contact-btn-fixed {
+            padding: 12px 20px;
             font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: 0.3s ease;
-            padding: 6px 12px;
-            border-radius: 4px;
+            letter-spacing: 1.5px;
         }
 
-        nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
-        nav a.active { color: #ffd700; background: rgba(255, 215, 0, 0.1); font-weight: 700; }
-        
-        /* The Contact Button in Sidebar */
-        nav a.contact-btn { 
-            border: 1px solid #ffd700; 
-            margin-top: 15px; 
-            color: #ffd700;
-            text-align: center;
-            font-weight: 700;
+        .contact-btn-fixed::before {
+            font-size: 1rem;
         }
-        nav a.contact-btn:hover { background: #ffd700; color: #000; }
 
-        /* --- Main Layout --- */
-        .container { max-width: 850px; margin: 0 auto; padding: 80px 20px; }
-        header { text-align: center; margin-bottom: 60px; }
-        h1 { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 2.8rem; letter-spacing: 0.25em; text-transform: uppercase; color: #ffffff; margin-bottom: 25px; }
-
-        #searchInput { 
-            width: 100%; 
-            max-width: 500px; 
-            padding: 15px 25px; 
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 215, 0, 0.2); 
-            border-radius: 4px; 
-            color: white; 
-            font-family: 'Montserrat', sans-serif; 
-            outline: none; 
-            display: block; 
-            margin: 0 auto 30px auto;
-            transition: 0.3s;
+        .back-to-top {
+            width: 45px;
+            height: 45px;
+            bottom: 80px;
         }
-        #searchInput:focus { border-color: #ffd700; background: rgba(255, 255, 255, 0.1); }
+    }
+</style>
+```
 
-        .btn { background: transparent; border: 1px solid #ffd700; color: #ffd700; padding: 12px 25px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: #ffd700; color: #000; }
-
-        /* --- Quotes --- */
-        section { margin-bottom: 100px; scroll-margin-top: 80px; }
-        .section-title { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: #ffd700; text-transform: uppercase; letter-spacing: 0.4em; margin-bottom: 40px; text-align: center; border-bottom: 1px solid rgba(255, 215, 0, 0.1); padding-bottom: 15px; }
-        
-        .quote-card { background: rgba(255, 255, 255, 0.02); padding: 45px; margin-bottom: 35px; border-left: 2px solid #ffd700; transition: 0.4s ease; }
-        .quote-card:hover { background: rgba(255, 215, 0, 0.03); transform: translateY(-5px); }
-        .quote-text { font-size: 1.4rem; font-style: italic; margin-bottom: 25px; color: #fff; line-height: 1.5; }
-        .quote-author { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: rgba(255, 215, 0, 0.75); letter-spacing: 2px; }
-
-        @media (max-width: 1100px) {
-            nav { position: fixed; top: 0; left: 0; right: 0; transform: none; flex-direction: row; overflow-x: auto; width: 100%; border-radius: 0; padding: 15px; background: rgba(10,10,10,0.95); height: 60px; align-items: center; }
-            .container { padding-top: 100px; }
-            nav a.contact-btn { margin-top: 0; margin-left: 10px; }
-        }
-    </style>
 </head>
 <body>
 
-    <div class="background-container"></div>
-    <div class="background-overlay"></div>
+```
+<div class="scroll-progress"></div>
+<div class="background-container"></div>
+<div class="background-overlay"></div>
 
-    <nav id="sidebar">
-        <a href="#freud">Freud</a>
-        <a href="#greenberg">Greenberg</a>
-        <a href="#yalom">Yalom</a>
-        <a href="#kernberg">Kernberg</a>
-        <a href="#moreno">Moreno</a>
-        <a href="#fonagy">Fonagy</a>
-        <a href="#tribe">Tribe</a>
-        <a href="#jung">Jung</a>
-        <a href="#meaning">Meaning</a>
-        <a href="#mcwilliams">McWilliams</a>
-        <a href="#relational">Relational</a>
-        <a href="contact.html" class="contact-btn">Contact</a>
-    </nav>
+<nav id="sidebar">
+    <a href="#freud">Freud</a>
+    <a href="#greenberg">Greenberg</a>
+    <a href="#yalom">Yalom</a>
+    <a href="#kernberg">Kernberg</a>
+    <a href="#moreno">Moreno</a>
+    <a href="#fonagy">Fonagy</a>
+    <a href="#tribe">Tribe</a>
+    <a href="#jung">Jung</a>
+    <a href="#meaning">Meaning</a>
+    <a href="#mcwilliams">McWilliams</a>
+    <a href="#relational">Relational</a>
+</nav>
 
-    <div class="container">
-        <header>
-            <h1>Echoes of the Psyche</h1>
-            <input type="text" id="searchInput" placeholder="SEARCH CLINICAL ARCHIVE..." onkeyup="searchQuotes()">
+<a href="contact.html" class="contact-btn-fixed">Contact</a>
+<button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+<div class="container">
+    <header>
+        <h1>Echoes of the Psyche</h1>
+        <p class="subtitle">A Clinical Archive</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search the archives..." onkeyup="searchQuotes()">
+            <span class="search-icon">🔍</span>
+        </div>
+        <div class="btn-group">
             <button class="btn" onclick="randomWisdom()">✨ Random Insight</button>
-        </header>
+            <button class="btn" onclick="resetFilters()">⟲ Reset View</button>
+        </div>
+    </header>
 
-        <main id="content">
-            <section id="freud">
-                <div class="section-title">Sigmund Freud</div>
-                <div class="quote-card"><p class="quote-text">"Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways."</p><p class="quote-author">Sigmund Freud</p></div>
-                <div class="quote-card"><p class="quote-text">"One day, in retrospect, the years of struggle will strike you as the most beautiful."</p><p class="quote-author">Sigmund Freud</p></div>
-                <div class="quote-card"><p class="quote-text">"Being entirely honest with oneself is a good exercise."</p><p class="quote-author">Sigmund Freud</p></div>
-            </section>
+    <main id="content">
+        <section id="freud">
+            <div class="section-title">Sigmund Freud</div>
+            <div class="quote-card">
+                <p class="quote-text">Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways.</p>
+                <p class="quote-author">Sigmund Freud</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">One day, in retrospect, the years of struggle will strike you as the most beautiful.</p>
+                <p class="quote-author">Sigmund Freud</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">Being entirely honest with oneself is a good exercise.</p>
+                <p class="quote-author">Sigmund Freud</p>
+            </div>
+        </section>
 
-            <section id="greenberg">
-                <div class="section-title">Leslie S. Greenberg</div>
-                <div class="quote-card"><p class="quote-text">"You cannot leave a place you have never been. You must arrive at your pain before you can leave it."</p><p class="quote-author">Leslie S. Greenberg</p></div>
-                <div class="quote-card"><p class="quote-text">"To help people change what they think, therapists must help them change what they feel."</p><p class="quote-author">Leslie S. Greenberg</p></div>
-            </section>
+        <section id="greenberg">
+            <div class="section-title">Leslie S. Greenberg</div>
+            <div class="quote-card">
+                <p class="quote-text">You cannot leave a place you have never been. You must arrive at your pain before you can leave it.</p>
+                <p class="quote-author">Leslie S. Greenberg</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">To help people change what they think, therapists must help them change what they feel.</p>
+                <p class="quote-author">Leslie S. Greenberg</p>
+            </div>
+        </section>
 
-            <section id="yalom">
-                <div class="section-title">Irvin D. Yalom</div>
-                <div class="quote-card"><p class="quote-text">"Every person must choose how much truth he can stand."</p><p class="quote-author">Irvin D. Yalom</p></div>
-                <div class="quote-card"><p class="quote-text">"Only the wounded healer can truly heal."</p><p class="quote-author">Irvin D. Yalom</p></div>
-            </section>
+        <section id="yalom">
+            <div class="section-title">Irvin D. Yalom</div>
+            <div class="quote-card">
+                <p class="quote-text">Every person must choose how much truth he can stand.</p>
+                <p class="quote-author">Irvin D. Yalom</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">Only the wounded healer can truly heal.</p>
+                <p class="quote-author">Irvin D. Yalom</p>
+            </div>
+        </section>
 
-            <section id="kernberg">
-                <div class="section-title">Otto Kernberg</div>
-                <div class="quote-card"><p class="quote-text">"The integration of love and hatred is the prerequisite for the capacity to love deeply."</p><p class="quote-author">Otto Kernberg</p></div>
-            </section>
+        <section id="kernberg">
+            <div class="section-title">Otto Kernberg</div>
+            <div class="quote-card">
+                <p class="quote-text">The integration of love and hatred is the prerequisite for the capacity to love deeply.</p>
+                <p class="quote-author">Otto Kernberg</p>
+            </div>
+        </section>
 
-            <section id="moreno">
-                <div class="section-title">Jacob L. Moreno</div>
-                <div class="quote-card"><p class="quote-text">"I shall take your eyes out and place them into mine... that I may see you with your eyes."</p><p class="quote-author">Jacob L. Moreno</p></div>
-            </section>
+        <section id="moreno">
+            <div class="section-title">Jacob L. Moreno</div>
+            <div class="quote-card">
+                <p class="quote-text">I shall take your eyes out and place them into mine... that I may see you with your eyes.</p>
+                <p class="quote-author">Jacob L. Moreno</p>
+            </div>
+        </section>
 
-            <section id="fonagy">
-                <div class="section-title">Peter Fonagy</div>
-                <div class="quote-card"><p class="quote-text">"Mentalization is the ability to see ourselves from the outside and others from the inside."</p><p class="quote-author">Peter Fonagy</p></div>
-            </section>
+        <section id="fonagy">
+            <div class="section-title">Peter Fonagy</div>
+            <div class="quote-card">
+                <p class="quote-text">Mentalization is the ability to see ourselves from the outside and others from the inside.</p>
+                <p class="quote-author">Peter Fonagy</p>
+            </div>
+        </section>
 
-            <section id="tribe">
-                <div class="section-title">The Tribe & Empathy</div>
-                <div class="quote-card"><p class="quote-text">"We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth."</p><p class="quote-author">Bill Kauth</p></div>
-                <div class="quote-card"><p class="quote-text">"Empathy is the oxygen of the therapeutic relationship."</p><p class="quote-author">Robert Elliott</p></div>
-            </section>
+        <section id="tribe">
+            <div class="section-title">The Tribe & Empathy</div>
+            <div class="quote-card">
+                <p class="quote-text">We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth.</p>
+                <p class="quote-author">Bill Kauth</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">Empathy is the oxygen of the therapeutic relationship.</p>
+                <p class="quote-author">Robert Elliott</p>
+            </div>
+        </section>
 
-            <section id="jung">
-                <div class="section-title">Carl Jung & Shadow</div>
-                <div class="quote-card"><p class="quote-text">"Until you make the unconscious conscious, it will direct your life and you will call it fate."</p><p class="quote-author">Carl Jung</p></div>
-                <div class="quote-card"><p class="quote-text">"One does not become enlightened by imagining figures of light, but by making the darkness conscious."</p><p class="quote-author">Carl Jung</p></div>
-            </section>
+        <section id="jung">
+            <div class="section-title">Carl Jung & Shadow</div>
+            <div class="quote-card">
+                <p class="quote-text">Until you make the unconscious conscious, it will direct your life and you will call it fate.</p>
+                <p class="quote-author">Carl Jung</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">One does not become enlightened by imagining figures of light, but by making the darkness conscious.</p>
+                <p class="quote-author">Carl Jung</p>
+            </div>
+        </section>
 
-            <section id="meaning">
-                <div class="section-title">Meaning & Freedom</div>
-                <div class="quote-card"><p class="quote-text">"When we are no longer able to change a situation, we are challenged to change ourselves."</p><p class="quote-author">Viktor Frankl</p></div>
-                <div class="quote-card"><p class="quote-text">"Through the 'Thou', a person becomes 'I'. All real living is meeting."</p><p class="quote-author">Martin Buber</p></div>
-            </section>
+        <section id="meaning">
+            <div class="section-title">Meaning & Freedom</div>
+            <div class="quote-card">
+                <p class="quote-text">When we are no longer able to change a situation, we are challenged to change ourselves.</p>
+                <p class="quote-author">Viktor Frankl</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">Through the 'Thou', a person becomes 'I'. All real living is meeting.</p>
+                <p class="quote-author">Martin Buber</p>
+            </div>
+        </section>
 
-            <section id="mcwilliams">
-                <div class="section-title">Nancy McWilliams</div>
-                <div class="quote-card"><p class="quote-text">"Mental health is the presence of vitality and the capacity to love, work, and play."</p><p class="quote-author">Nancy McWilliams</p></div>
-                <div class="quote-card"><p class="quote-text">"Feelings have their own kind of wisdom."</p><p class="quote-author">Nancy McWilliams</p></div>
-            </section>
+        <section id="mcwilliams">
+            <div class="section-title">Nancy McWilliams</div>
+            <div class="quote-card">
+                <p class="quote-text">Mental health is the presence of vitality and the capacity to love, work, and play.</p>
+                <p class="quote-author">Nancy McWilliams</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">Feelings have their own kind of wisdom.</p>
+                <p class="quote-author">Nancy McWilliams</p>
+            </div>
+        </section>
 
-            <section id="relational">
-                <div class="section-title">Relational Landscapes</div>
-                <div class="quote-card"><p class="quote-text">"If you want community, you must be willing to be obligated, dependent, tied, attached."</p><p class="quote-author">Paul Wachtel</p></div>
-                <div class="quote-card"><p class="quote-text">"If you hate a person, you hate something in him that is part of yourself."</p><p class="quote-author">Stephen Mitchell</p></div>
-            </section>
-        </main>
-    </div>
+        <section id="relational">
+            <div class="section-title">Relational Landscapes</div>
+            <div class="quote-card">
+                <p class="quote-text">If you want community, you must be willing to be obligated, dependent, tied, attached.</p>
+                <p class="quote-author">Paul Wachtel</p>
+            </div>
+            <div class="quote-card">
+                <p class="quote-text">If you hate a person, you hate something in him that is part of yourself.</p>
+                <p class="quote-author">Stephen Mitchell</p>
+            </div>
+        </section>
+    </main>
+</div>
 
-    <script>
-        function searchQuotes() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.quote-card');
-            cards.forEach(card => {
-                let text = card.innerText.toLowerCase();
-                card.style.display = text.includes(input) ? "" : "none";
-            });
+<script>
+    // Create floating particles
+    function createParticles() {
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            document.body.appendChild(particle);
         }
+    }
+    createParticles();
 
-        function randomWisdom() {
-            let cards = document.querySelectorAll('.quote-card');
-            let randomIndex = Math.floor(Math.random() * cards.length);
-            cards[randomIndex].scrollIntoView({behavior: "smooth", block: "center"});
-            cards[randomIndex].style.borderLeftColor = "#fff";
-            setTimeout(() => { cards[randomIndex].style.borderLeftColor = "#ffd700"; }, 2000);
-        }
+    // Search functionality
+    function searchQuotes() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.quote-card');
+        let visibleCount = 0;
 
-        window.addEventListener('scroll', () => {
-            let sections = document.querySelectorAll('section');
-            let navLinks = document.querySelectorAll('nav a:not(.contact-btn)');
-            sections.forEach(sec => {
-                let top = window.scrollY;
-                let offset = sec.offsetTop - 150;
-                let height = sec.offsetHeight;
-                let id = sec.getAttribute('id');
-                if(top >= offset && top < offset + height) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        let target = document.querySelector('nav a[href*=' + id + ']');
-                        if(target) target.classList.add('active');
-                    });
-                }
-            });
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            if (text.includes(input)) {
+                card.style.display = "";
+                visibleCount++;
+                card.style.animation = 'fadeIn 0.5s ease';
+            } else {
+                card.style.display = "none";
+            }
         });
-    </script>
+    }
+
+    // Random wisdom with highlight effect
+    function randomWisdom() {
+        const cards = document.querySelectorAll('.quote-card');
+        const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
+        const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+        
+        randomCard.scrollIntoView({behavior: "smooth", block: "center"});
+        randomCard.style.borderLeftColor = "#fff";
+        randomCard.style.boxShadow = "0 0 40px rgba(255, 215, 0, 0.4)";
+        
+        setTimeout(() => {
+            randomCard.style.borderLeftColor = "#ffd700";
+            randomCard.style.boxShadow = "";
+        }, 2500);
+    }
+
+    // Reset filters
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        searchQuotes();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Scroll progress indicator
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.querySelector('.scroll-progress').style.width = scrolled + '%';
+
+        // Active section highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        sections.forEach(sec => {
+            const top = window.scrollY;
+            const offset = sec.offsetTop - 150;
+            const height = sec.offsetHeight;
+            const id = sec.getAttribute('id');
+            
+            if(top >= offset && top < offset + height) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const target = document.querySelector('nav a[href*=' + id + ']');
+                    if(target) target.classList.add('active');
+                });
+            }
+        });
+
+        // Back to top button visibility
+        const backToTop = document.querySelector('.back-to-top');
+        if (window.scrollY > 500) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }
+        });
+    });
+
+    // Add entrance animations to quote cards on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeIn 0.8s ease forwards';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.quote-card').forEach(card => {
+        observer.observe(card);
+    });
+</script>
+```
+
 </body>
 </html>
