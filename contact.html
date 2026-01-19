@@ -1,186 +1,246 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Insightful Voices</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Contact | Echoes of the Psyche</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* 1. DEEP, MOODY BACKGROUND */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Playfair Display', serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #1a1a1a; /* Dark charcoal */
-            background-image: radial-gradient(circle at center, #2c2c2c 0%, #121212 100%);
+            background-color: #0a0a0a;
             color: #e0e0e0;
             padding: 20px;
+            overflow-x: hidden;
         }
 
-        /* 2. THE FLOATING CARD */
+        /* --- Background Integration (Matches Main Page) --- */
+        .background-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background-image: url('https://googleusercontent.com/image_generation_content/0'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.9), rgba(5, 5, 5, 0.98));
+            backdrop-filter: blur(8px);
+        }
+
+        /* --- The Glass Form Container --- */
         .container {
             width: 100%;
             max-width: 900px;
             display: grid;
-            grid-template-columns: 1fr 1.5fr; /* Split layout */
-            background: #222;
+            grid-template-columns: 1fr 1.5fr;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        /* 3. LEFT SIDE: THE TEXT */
+        /* --- Left Side: Clinical Identity --- */
         .info-sidebar {
-            background: #27ae60; /* Professional Green */
-            padding: 40px;
-            color: white;
+            background: rgba(255, 215, 0, 0.05);
+            padding: 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border-right: 1px solid rgba(255, 215, 0, 0.1);
         }
 
         .info-sidebar h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ffd700;
+            margin-bottom: 30px;
         }
 
         .info-sidebar p {
-            font-size: 16px;
-            line-height: 1.6;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #fff;
             font-style: italic;
+            margin-bottom: 20px;
         }
 
-        /* 4. RIGHT SIDE: THE FORM */
-        form { 
-            padding: 50px; 
-            background: #ffffff;
-            color: #333;
+        .quote-cite {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* --- Right Side: The Form --- */
+        .form-area {
+            padding: 60px;
+            background: rgba(10, 10, 10, 0.4);
         }
 
         h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #1a1a1a;
-        }
-
-        label { 
-            display: block; 
-            font-size: 12px; 
-            font-weight: 700;
-            color: #888; 
-            margin-bottom: 8px; 
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 40px;
+            color: #fff;
         }
 
-        input, textarea { 
-            width: 100%; 
-            padding: 12px 0; 
-            margin-bottom: 30px; 
-            border: none;
-            border-bottom: 2px solid #eee;
-            background: transparent;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus { 
-            outline: none;
-            border-bottom-color: #27ae60;
-        }
-
-        /* File Upload Styling */
-        .file-upload {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px dashed #ccc;
-            margin-bottom: 30px;
-        }
-
-        /* 5. THE BUTTON */
-        button { 
-            width: 100%; 
-            padding: 18px; 
-            background: #1a1a1a;
-            color: white; 
-            border: none; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-size: 14px; 
-            font-weight: 700; 
+        label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            transition: all 0.3s;
+            opacity: 0.8;
         }
 
-        button:hover { 
-            background: #27ae60; 
-            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+        input, textarea {
+            width: 100%;
+            padding: 12px 0;
+            margin-bottom: 40px;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-bottom-color: #ffd700;
+        }
+
+        /* File Upload */
+        .file-upload {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px dashed rgba(255, 215, 0, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .file-upload input {
+            margin-bottom: 0;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Submit Button */
+        button {
+            width: 100%;
+            padding: 20px;
+            background: transparent;
+            color: #ffd700;
+            border: 1px solid #ffd700;
+            border-radius: 0;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: 0.4s;
+        }
+
+        button:hover {
+            background: #ffd700;
+            color: #000;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
         }
 
         .back-home {
             display: block;
-            margin-top: 25px;
+            margin-top: 30px;
             text-align: center;
             text-decoration: none;
-            color: #888;
-            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        /* Responsive Layout */
-        @media (max-width: 768px) {
+        .back-home:hover {
+            color: #ffd700;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
             .container { grid-template-columns: 1fr; }
-            .info-sidebar { padding: 30px; text-align: center; }
-            form { padding: 30px; }
+            .info-sidebar { padding: 40px; text-align: center; }
+            .form-area { padding: 40px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="background-container"></div>
+    <div class="background-overlay"></div>
+
     <div class="container">
         <div class="info-sidebar">
             <h2>The Unspoken</h2>
             <p>"All real living is meeting."</p>
-            <p style="font-size: 14px; margin-top: 10px;">— Martin Buber</p>
-            <div style="margin-top: 40px; font-size: 14px; opacity: 0.8;">
-                Reach out to share a quote, a thought, or a piece of your own symphony.
+            <span class="quote-cite">— Martin Buber</span>
+            
+            <div style="margin-top: 50px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; line-height: 2; opacity: 0.6; letter-spacing: 0.05em;">
+                REACH OUT TO SHARE A QUOTE, A CLINICAL INSIGHT, OR A PIECE OF YOUR OWN SYMPHONY.
             </div>
         </div>
 
-        <form action="https://formsubmit.co/melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
-            <h3>Send a Message</h3>
-            
-            <label>Full Name</label>
-            <input type="text" name="name" required>
-            
-            <label>Email Address</label>
-            <input type="email" name="email" required>
-            
-            <label>Your Message</label>
-            <textarea name="message" rows="3" required></textarea>
-            
-            <div class="file-upload">
-                <label>Attach a Document or Image</label>
-                <input type="file" name="attachment" accept="image/*" style="border:none; margin-bottom:0;">
-            </div>
+        <div class="form-area">
+            <form action="https://formsubmit.co/melipil5780@gmail.com" method="POST" enctype="multipart/form-data">
+                <h3>Submit Inquiry</h3>
+                
+                <label>Full Name</label>
+                <input type="text" name="name" required>
+                
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+                
+                <label>Clinical Reflection / Message</label>
+                <textarea name="message" rows="2" required></textarea>
+                
+                <div class="file-upload">
+                    <label>Attachment (Image or Text)</label>
+                    <input type="file" name="attachment" accept="image/*,.pdf,.doc">
+                </div>
 
-            <input type="hidden" name="_next" value="https://melipil5780-afk.github.io/quotes/thanks.html">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_subject" value="New Insight from Website">
+                <input type="hidden" name="_next" value="https://melipil5780-afk.github.io/quotes/thanks.html">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Insight from Website">
 
-            <button type="submit">Submit Inquiry</button>
+                <button type="submit">Send Message</button>
 
-            <a href="index.html" class="back-home">Return to the Gallery</a>
-        </form>
+                <a href="index.html" class="back-home">Return to the Gallery</a>
+            </form>
+        </div>
     </div>
 
 </body>
