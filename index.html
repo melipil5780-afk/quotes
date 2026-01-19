@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinical Insights: Echoes of the Psyche</title>
+    <title>The Curated Quote List (Clinical Focus)</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -13,10 +13,9 @@
             line-height: 1.6;
             color: #e0e0e0;
             background-color: #0a0a0a;
-            transition: background-color 0.5s ease;
         }
 
-        /* --- Background Integration --- */
+        /* --- Background --- */
         .background-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -24,34 +23,27 @@
             background-image: url('https://googleusercontent.com/image_generation_content/0'); 
             background-size: cover;
             background-position: center;
-            transition: opacity 0.5s ease;
         }
 
         .background-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.85), rgba(5, 5, 5, 0.98));
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.9), rgba(5, 5, 5, 0.98));
             backdrop-filter: blur(3px);
-            transition: opacity 0.5s ease;
         }
 
-        /* Focus Mode Classes */
-        body.focus-active .background-container { opacity: 0.1; }
-        body.focus-active .background-overlay { background: #000; opacity: 1; }
-
-        /* --- Smart Sidebar --- */
+        /* --- Sidebar Navigation --- */
         nav {
             position: fixed;
-            left: 20px;
-            top: 50%;
+            left: 20px; top: 50%;
             transform: translateY(-50%);
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 20px 10px;
+            padding: 15px 10px;
             border-radius: 12px;
             border: 1px solid rgba(255, 215, 0, 0.1);
             backdrop-filter: blur(10px);
@@ -61,163 +53,64 @@
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: 0.3s ease;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 4px;
-            white-space: nowrap;
         }
 
         nav a:hover { color: #fff; }
-        nav a.active {
+        nav a.active { color: #ffd700; background: rgba(255, 215, 0, 0.15); font-weight: 700; }
+        
+        nav a.contact-link { 
+            border: 1px solid rgba(255, 215, 0, 0.4); 
+            margin-top: 15px; 
             color: #ffd700;
-            background: rgba(255, 215, 0, 0.15);
-            font-weight: 700;
+            text-align: center;
         }
 
         /* --- Main Layout --- */
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-
+        .container { max-width: 850px; margin: 0 auto; padding: 80px 20px; }
         header { text-align: center; margin-bottom: 50px; }
+        h1 { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 2.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff; margin-bottom: 20px; }
+
+        .controls-area { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .btn { background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.4); color: #ffd700; padding: 10px 20px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; cursor: pointer; border-radius: 30px; transition: 0.3s; }
         
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300; font-size: 3rem; letter-spacing: 0.2em;
-            text-transform: uppercase; color: #ffffff;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        #searchInput { 
+            width: 100%; 
+            max-width: 600px; 
+            padding: 15px 25px; 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 30px; 
+            color: white; 
+            font-family: 'Montserrat', sans-serif; 
+            outline: none; 
+            display: block; 
+            margin: 0 auto; 
         }
 
-        /* --- Controls & Search --- */
-        .controls-area {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            color: #ffd700;
-            padding: 10px 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            border-radius: 30px;
-            transition: 0.3s;
-        }
-
-        .btn:hover { background: rgba(255, 215, 0, 0.3); box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
-
-        #searchInput {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px 25px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            outline: none;
-            display: block;
-            margin: 0 auto;
-        }
-        #searchInput:focus { border-color: #ffd700; background: rgba(255, 255, 255, 0.12); }
-
-        /* --- Content Styling --- */
-        section { margin-bottom: 80px; scroll-margin-top: 40px; }
-
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem; font-weight: 700; color: #ffd700;
-            text-transform: uppercase; letter-spacing: 0.3em;
-            margin-bottom: 30px; text-align: center;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            padding-bottom: 10px;
-            display: inline-block;
-            width: 100%;
-        }
-
-        /* --- Quote Cards --- */
-        .quote-card {
-            position: relative;
-            background: rgba(35, 35, 35, 0.65);
-            padding: 40px 50px; margin-bottom: 30px;
-            border-left: 4px solid rgba(255, 215, 0, 0.4);
-            border-radius: 0 6px 6px 0;
-            transition: all 0.4s ease;
-        }
-
-        .quote-card:hover {
-            transform: translateY(-5px);
-            background: rgba(50, 50, 50, 0.85);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Highlight animation for random quote */
-        .highlight-card {
-            animation: pulse-gold 2s ease;
-        }
-
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); border-left-color: #fff; }
-            70% { box-shadow: 0 0 0 20px rgba(255, 215, 0, 0); border-left-color: #ffd700; }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-        }
-
-        .quote-text { font-size: 1.35rem; font-style: italic; margin-bottom: 25px; color: #fff; }
+        /* --- Quotes --- */
+        section { margin-bottom: 80px; scroll-margin-top: 60px; }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700; color: #ffd700; text-transform: uppercase; letter-spacing: 0.3em; margin-bottom: 30px; text-align: center; border-bottom: 1px solid rgba(255, 215, 0, 0.2); padding-bottom: 10px; display: inline-block; width: 100%; }
         
-        .quote-author {
-            font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.1em;
-            color: rgba(255, 215, 0, 0.8); display: flex; align-items: center;
-        }
-        .quote-author::before {
-            content: ''; display: inline-block; width: 20px; height: 1px;
-            background-color: rgba(255, 215, 0, 0.8); margin-right: 15px;
-        }
+        .quote-card { position: relative; background: rgba(30, 30, 30, 0.7); padding: 40px; margin-bottom: 30px; border-left: 4px solid rgba(255, 215, 0, 0.4); border-radius: 0 6px 6px 0; transition: 0.3s; }
+        .quote-card:hover { transform: translateX(5px); background: rgba(45, 45, 45, 0.8); }
+        .quote-text { font-size: 1.3rem; font-style: italic; margin-bottom: 20px; color: #fff; }
+        .quote-author { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: rgba(255, 215, 0, 0.8); }
 
-        /* Copy Button */
-        .copy-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-        .copy-btn:hover { color: #ffd700; transform: scale(1.1); }
-        .copy-tooltip {
-            position: absolute; top: -10px; right: 20px;
-            background: #ffd700; color: #000;
-            font-family: sans-serif; font-size: 0.7rem; font-weight: bold;
-            padding: 4px 8px; border-radius: 4px;
-            opacity: 0; transition: opacity 0.3s; pointer-events: none;
-        }
+        /* --- Contact Section --- */
+        #contact { background: rgba(255, 215, 0, 0.05); padding: 60px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.2); text-align: center; }
+        .contact-details p { font-family: 'Montserrat', sans-serif; margin: 15px 0; font-size: 1.1rem; }
+        .contact-details a { color: #ffd700; text-decoration: none; border-bottom: 1px solid transparent; }
+        .contact-details a:hover { border-bottom: 1px solid #ffd700; }
 
-        /* Mobile Adjustments */
         @media (max-width: 1100px) {
-            nav {
-                position: fixed; top: 0; left: 0; right: 0; transform: none;
-                flex-direction: row; overflow-x: auto; width: 100%;
-                border-radius: 0; padding: 15px; border-bottom: 1px solid rgba(255,215,0,0.2);
-                background: rgba(10,10,10,0.95);
-            }
+            nav { position: fixed; top: 0; left: 0; right: 0; transform: none; flex-direction: row; overflow-x: auto; width: 100%; border-radius: 0; padding: 15px; background: rgba(10,10,10,0.98); }
             .container { padding-top: 140px; }
-            h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -233,254 +126,135 @@
         <a href="#kernberg">Kernberg</a>
         <a href="#moreno">Moreno</a>
         <a href="#fonagy">Fonagy</a>
-        <a href="#tribe">The Tribe</a>
-        <a href="#jung">Jung/Shadow</a>
+        <a href="#tribe">Tribe</a>
+        <a href="#jung">Jung</a>
         <a href="#meaning">Meaning</a>
         <a href="#mcwilliams">McWilliams</a>
         <a href="#relational">Relational</a>
+        <a href="#contact" class="contact-link">Contact</a>
     </nav>
 
     <div class="container">
         <header>
             <h1>Echoes of the Psyche</h1>
-            
             <div class="controls-area">
-                <button class="btn" onclick="toggleFocusMode()">👁️ Focus Mode</button>
-                <button class="btn" onclick="randomWisdom()">✨ Random Insight</button>
+                <button class="btn" onclick="randomWisdom()">✨ Random Quote</button>
             </div>
-
-            <input type="text" id="searchInput" placeholder="Search insights by keyword or author..." onkeyup="searchQuotes()">
+            <input type="text" id="searchInput" placeholder="Search by keyword or therapist..." onkeyup="searchQuotes()">
         </header>
 
         <main id="content">
             <section id="freud">
                 <div class="section-title">Sigmund Freud</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways."</p><p class="quote-author">Sigmund Freud</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"One day, in retrospect, the years of struggle will strike you as the most beautiful."</p><p class="quote-author">Sigmund Freud</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Being entirely honest with oneself is a good exercise."</p><p class="quote-author">Sigmund Freud</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"Unexpressed emotions will never die. They are buried alive and will come forth later in uglier ways."</p><p class="quote-author">Sigmund Freud</p></div>
+                <div class="quote-card"><p class="quote-text">"One day, in retrospect, the years of struggle will strike you as the most beautiful."</p><p class="quote-author">Sigmund Freud</p></div>
+                <div class="quote-card"><p class="quote-text">"Being entirely honest with oneself is a good exercise."</p><p class="quote-author">Sigmund Freud</p></div>
             </section>
 
             <section id="greenberg">
                 <div class="section-title">Leslie S. Greenberg</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"You cannot leave a place you have never been. You must arrive at your pain before you can leave it."</p><p class="quote-author">Leslie S. Greenberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"To help people change what they think, therapists must help them change what they feel."</p><p class="quote-author">Leslie S. Greenberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Emotional expression governs, and changes, interaction. Anger produces distance, whereas vulnerability disarms."</p><p class="quote-author">Leslie S. Greenberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"People often experience emotional flooding as dangerous... Excessive control of emotion may lead to impulsive actions."</p><p class="quote-author">Leslie S. Greenberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Adopting a stance toward any external experience as partial rather than total allows the feeling to more easily be accepted."</p><p class="quote-author">Leslie S. Greenberg</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"You cannot leave a place you have never been. You must arrive at your pain before you can leave it."</p><p class="quote-author">Leslie S. Greenberg</p></div>
+                <div class="quote-card"><p class="quote-text">"Emotions are seen as crucial in motivating behavior. People generally do what they feel like doing rather than what reason or logic dictates. To help people change what they think, therapists must help them change what they feel."</p><p class="quote-author">Leslie S. Greenberg</p></div>
+                <div class="quote-card"><p class="quote-text">"Emotional expression governs, and changes, interaction. Anger produces distance, whereas vulnerability disarms."</p><p class="quote-author">Leslie S. Greenberg</p></div>
+                <div class="quote-card"><p class="quote-text">"People often experience emotional flooding as dangerous... Excessive control of emotion may lead to impulsive actions."</p><p class="quote-author">Leslie S. Greenberg</p></div>
+                <div class="quote-card"><p class="quote-text">"Adopting a stance toward any external experience as partial rather than total allows the feeling to more easily be accepted... Seeing aspects of experience as part of oneself becomes a crucial aspect of change."</p><p class="quote-author">Leslie S. Greenberg</p></div>
             </section>
 
             <section id="yalom">
                 <div class="section-title">Irvin D. Yalom</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Every person must choose how much truth he can stand."</p><p class="quote-author">Irvin D. Yalom</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Despair is the price one pays for self-awareness. Look deeply into life, and you'll always find despair."</p><p class="quote-author">Irvin D. Yalom</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Only the wounded healer can truly heal."</p><p class="quote-author">Irvin D. Yalom</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Some day soon, perhaps in forty years, there will be no one alive who has ever known me. That's when I will be truly dead."</p><p class="quote-author">Irvin D. Yalom</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Love is not just a passion spark between two people; there is infinite difference between falling in love and standing in love."</p><p class="quote-author">Irvin D. Yalom</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"Every person must choose how much truth he can stand."</p><p class="quote-author">Irvin D. Yalom</p></div>
+                <div class="quote-card"><p class="quote-text">"Despair is the price one pays for self-awareness. Look deeply into life, and you'll always find despair."</p><p class="quote-author">Irvin D. Yalom</p></div>
+                <div class="quote-card"><p class="quote-text">"Only the wounded healer can truly heal."</p><p class="quote-author">Irvin D. Yalom</p></div>
+                <div class="quote-card"><p class="quote-text">"Some day soon, perhaps in forty years, there will be no one alive who has ever known me. That's when I will be truly dead — when I exist in no one's memory."</p><p class="quote-author">Irvin D. Yalom</p></div>
+                <div class="quote-card"><p class="quote-text">"Love is not just a passion spark between two people; there is infinite difference between falling in love and standing in love."</p><p class="quote-author">Irvin D. Yalom</p></div>
             </section>
 
             <section id="kernberg">
                 <div class="section-title">Otto Kernberg</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"The integration of love and hatred is the prerequisite for the capacity to love deeply."</p><p class="quote-author">Otto Kernberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Incapacity to commit oneself to any value system beyond one supplying self-serving needs usually indicates severe narcissistic pathology."</p><p class="quote-author">Otto Kernberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Major threat to the psychoanalyst's creativity... is the patient's relentless, aggressive attack on the analyst's work."</p><p class="quote-author">Otto Kernberg</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Introspection and self-analysis... ethical behavior... and a commitment to the psychoanalytic method are essential."</p><p class="quote-author">Otto Kernberg</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"The integration of love and hatred is the prerequisite for the capacity to love deeply."</p><p class="quote-author">Otto Kernberg</p></div>
+                <div class="quote-card"><p class="quote-text">"Incapacity to commit oneself to any value system beyond one supplying self-serving needs usually indicates severe narcissistic pathology."</p><p class="quote-author">Otto Kernberg</p></div>
+                <div class="quote-card"><p class="quote-text">"Major threat to the psychoanalyst's creativity in working with his patient is the patient's relentless, aggressive attack on the analyst's work with him."</p><p class="quote-author">Otto Kernberg</p></div>
+                <div class="quote-card"><p class="quote-text">"Introspection and self-analysis, a creative capacity, an ability to think under adverse circumstances, ethical behavior that assures honesty in the work and protects the patient, and a commitment to the psychoanalytic method are all essential aspects of psychoanalytic competence."</p><p class="quote-author">Otto Kernberg</p></div>
             </section>
 
             <section id="moreno">
                 <div class="section-title">Jacob L. Moreno</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"I shall take your eyes out and place them into mine... that I may see you with your eyes."</p><p class="quote-author">Jacob L. Moreno</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"A meeting of two: eye to eye, face to face... then I will look at me with mine."</p><p class="quote-author">Jacob L. Moreno</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"I shall take your eyes out and place them into mine... that I may see you with your eyes."</p><p class="quote-author">Jacob L. Moreno</p></div>
+                <div class="quote-card"><p class="quote-text">"A meeting of two: eye to eye, face to face... then I will look at me with mine."</p><p class="quote-author">Jacob L. Moreno</p></div>
             </section>
 
             <section id="fonagy">
                 <div class="section-title">Peter Fonagy</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Mentalization is the ability to see ourselves from the outside and others from the inside."</p><p class="quote-author">Peter Fonagy</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"We believe that the caregiver's capacity to observe the moment-to-moment changes in the child's mental state is critical."</p><p class="quote-author">Peter Fonagy</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Insecurity in attachment relationships is a signal of limitation in mentalizing skills."</p><p class="quote-author">Peter Fonagy</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"Mentalization is the ability to see ourselves from the outside and others from the inside."</p><p class="quote-author">Peter Fonagy</p></div>
+                <div class="quote-card"><p class="quote-text">"We believe that the caregiver's capacity to observe the moment-to-moment changes in the child's mental state is critical in the development of mentalizing capacity."</p><p class="quote-author">Peter Fonagy</p></div>
+                <div class="quote-card"><p class="quote-text">"Mentalization is intrinsically linked to the development of the self, to its gradually elaborated inner organization, and to its participation in human society."</p><p class="quote-author">Peter Fonagy</p></div>
+                <div class="quote-card"><p class="quote-text">"Playing with reality, making the real unreal and vice versa, is the principal avenue for the development of mentalization."</p><p class="quote-author">Peter Fonagy</p></div>
+                <div class="quote-card"><p class="quote-text">"Insecurity in attachment relationships is a signal of limitation in mentalizing skills."</p><p class="quote-author">Peter Fonagy</p></div>
+                <div class="quote-card"><p class="quote-text">"Psychotherapy with individuals whose early experiences have led to a compromised mentalizing capacity should be focused on helping them to develop a robust mentalizing self-organization."</p><p class="quote-author">Peter Fonagy</p></div>
             </section>
 
             <section id="tribe">
-                <div class="section-title">Voice of the Tribe</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth."</p><p class="quote-author">Bill Kauth</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Empathy is the oxygen of the therapeutic relationship."</p><p class="quote-author">Robert Elliott</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Emotions tell us what is important to us. They are the compass for our needs."</p><p class="quote-author">Rhonda Goldman</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Where a man's wound is, that is where his genius will be found."</p><p class="quote-author">Robert Bly</p>
-                </div>
+                <div class="section-title">The Tribe & Empathy</div>
+                <div class="quote-card"><p class="quote-text">"We cannot do it alone. Men need a tribe to challenge them, support them, and witness their truth."</p><p class="quote-author">Bill Kauth</p></div>
+                <div class="quote-card"><p class="quote-text">"A few people of integrity can go a long way."</p><p class="quote-author">Bill Kauth</p></div>
+                <div class="quote-card"><p class="quote-text">"Empathy is the oxygen of the therapeutic relationship."</p><p class="quote-author">Robert Elliott</p></div>
+                <div class="quote-card"><p class="quote-text">"Emotions tell us what is important to us. They are the compass for our needs."</p><p class="quote-author">Rhonda Goldman</p></div>
+                <div class="quote-card"><p class="quote-text">"Where a man's wound is, that is where his genius will be found."</p><p class="quote-author">Robert Bly</p></div>
             </section>
 
             <section id="jung">
-                <div class="section-title">Carl Jung & Shadow Work</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Until you make the unconscious conscious, it will direct your life and you will call it fate."</p><p class="quote-author">Carl Jung</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"One does not become enlightened by imagining figures of light, but by making the darkness conscious."</p><p class="quote-author">Carl Jung</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"There is a gold mine in the shadow. Your power lies in the parts of yourself you have rejected."</p><p class="quote-author">Rich Tosi</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"To speak your truth cleanly, without blame or judgment, is the act of a warrior."</p><p class="quote-author">Ron Hering</p>
-                </div>
+                <div class="section-title">Carl Jung & Shadow</div>
+                <div class="quote-card"><p class="quote-text">"Until you make the unconscious conscious, it will direct your life and you will call it fate."</p><p class="quote-author">Carl Jung</p></div>
+                <div class="quote-card"><p class="quote-text">"One does not become enlightened by imagining figures of light, but by making the darkness conscious."</p><p class="quote-author">Carl Jung</p></div>
+                <div class="quote-card"><p class="quote-text">"There is a gold mine in the shadow. Your power lies in the parts of yourself you have rejected."</p><p class="quote-author">Rich Tosi</p></div>
+                <div class="quote-card"><p class="quote-text">"To speak your truth cleanly, without blame or judgment, is the act of a warrior."</p><p class="quote-author">Ron Hering</p></div>
             </section>
 
             <section id="meaning">
-                <div class="section-title">The Search for Meaning</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"When we are no longer able to change a situation, we are challenged to change ourselves."</p><p class="quote-author">Viktor Frankl</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Everything can be taken from a man but one thing: the last of the human freedoms—to choose one’s attitude."</p><p class="quote-author">Viktor Frankl</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Through the 'Thou', a person becomes 'I'. All real living is meeting."</p><p class="quote-author">Martin Buber</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"The songs we compose with our lives... want to come back home to our tonics, to our essential selves."</p><p class="quote-author">Simcha Frischling</p>
-                </div>
+                <div class="section-title">Meaning & Freedom</div>
+                <div class="quote-card"><p class="quote-text">"When we are no longer able to change a situation, we are challenged to change ourselves."</p><p class="quote-author">Viktor Frankl</p></div>
+                <div class="quote-card"><p class="quote-text">"Everything can be taken from a man but one thing: the last of the human freedoms—to choose one’s attitude in any given set of circumstances."</p><p class="quote-author">Viktor Frankl</p></div>
+                <div class="quote-card"><p class="quote-text">"The songs we compose with our lives... want to come back home to our tonics, to our essential selves, to loving intimacy, to our Source."</p><p class="quote-author">Simcha Frischling</p></div>
+                <div class="quote-card"><p class="quote-text">"Through the 'Thou', a person becomes 'I'. All real living is meeting."</p><p class="quote-author">Martin Buber</p></div>
+                <div class="quote-card"><p class="quote-text">"The goal of therapy is not just to feel better, it is to expand the freedom to think, feel, and live."</p><p class="quote-author">Jonathan Shedler</p></div>
             </section>
 
             <section id="mcwilliams">
                 <div class="section-title">Nancy McWilliams</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Mental health is the presence of vitality and the capacity to love, work, and play."</p><p class="quote-author">Nancy McWilliams</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"The experience of speaking from the heart and being taken seriously builds the psychic architecture that supports the capacity to bear life."</p><p class="quote-author">Nancy McWilliams</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Feelings have their own kind of wisdom."</p><p class="quote-author">Nancy McWilliams</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Putting out crackers and cheese is reasonable when visitors show up with wine, but not when they arrive with cyanide."</p><p class="quote-author">Nancy McWilliams</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"Diagnosis can be used as a defense against anxiety about the unknown."</p><p class="quote-author">Nancy McWilliams</p>
-                </div>
+                <div class="quote-card"><p class="quote-text">"Mental health is the presence of vitality and the capacity to love, work, and play."</p><p class="quote-author">Nancy McWilliams</p></div>
+                <div class="quote-card"><p class="quote-text">"The experience of speaking from the heart and being taken seriously builds the psychic architecture that supports the capacity to bear life."</p><p class="quote-author">Nancy McWilliams</p></div>
+                <div class="quote-card"><p class="quote-text">"Feelings have their own kind of wisdom."</p><p class="quote-author">Nancy McWilliams</p></div>
+                <div class="quote-card"><p class="quote-text">"Freudian notion that people act out what they cannot remember or what they cannot allow themselves to feel... When there are no negative consequences for their behavior, interpretations just roll off them."</p><p class="quote-author">Nancy McWilliams</p></div>
+                <div class="quote-card"><p class="quote-text">"Many patients are so terrified of emotional intimacy that they are driven over and over again to provoke crises that allow them to distance with impunity."</p><p class="quote-author">Nancy McWilliams</p></div>
+                <div class="quote-card"><p class="quote-text">"Putting out crackers and cheese is reasonable when visitors show up with wine, but not when they arrive with cyanide."</p><p class="quote-author">Nancy McWilliams</p></div>
+                <div class="quote-card"><p class="quote-text">"Once I have a good feel for a person, and the work is going well, I stop thinking diagnostically and simply immerse myself in the unique relationship... Diagnosis can, like anything else, be used as a defense against anxiety about the unknown."</p><p class="quote-author">Nancy McWilliams</p></div>
             </section>
 
             <section id="relational">
                 <div class="section-title">Relational Landscapes</div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"If you want community, you must be willing to be obligated, dependent, tied, attached."</p><p class="quote-author">Paul Wachtel</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"A primary goal of therapy is to help the patient to live a more fully satisfying life."</p><p class="quote-author">Paul Wachtel</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"A psychoanalyst is someone who pretends not to know everything."</p><p class="quote-author">Glen Gabbard</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"We should not promise our patients that we can cure their symptoms. Our focus should be on helping them to understand their underlying conflicts."</p><p class="quote-author">Glen Gabbard</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"If you hate a person, you hate something in him that is part of yourself. What isn't part of ourselves doesn't disturb us."</p><p class="quote-author">Stephen Mitchell</p>
-                </div>
-                <div class="quote-card">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋</button><span class="copy-tooltip">Copied!</span>
-                    <p class="quote-text">"The goal of therapy is not just to feel better, it is to expand the freedom to think, feel, and live."</p><p class="quote-author">Jonathan Shedler</p>
+                <div class="quote-card"><p class="quote-text">"If you want community, you must be willing to be obligated, dependent, tied, attached."</p><p class="quote-author">Paul Wachtel</p></div>
+                <div class="quote-card"><p class="quote-text">"A primary goal of therapy is to help the patient to live a more fully satisfying life."</p><p class="quote-author">Paul Wachtel</p></div>
+                <div class="quote-card"><p class="quote-text">"The psychological mechanisms in pathological states are merely extensions of principles involved in normal developmental functioning."</p><p class="quote-author">Glen Gabbard</p></div>
+                <div class="quote-card"><p class="quote-text">"A psychoanalyst is someone who pretends not to know everything. We are constantly learning from our patients and our own experience."</p><p class="quote-author">Glen Gabbard</p></div>
+                <div class="quote-card"><p class="quote-text">"There is no single definition of a difficult patient."</p><p class="quote-author">Glen Gabbard</p></div>
+                <div class="quote-card"><p class="quote-text">"We should not promise our patients that we can cure their symptoms. Our focus should be on helping them to understand their underlying conflicts and to develop healthier coping mechanisms."</p><p class="quote-author">Glen Gabbard</p></div>
+                <div class="quote-card"><p class="quote-text">"If you hate a person, you hate something in him that is part of yourself. What isn't part of ourselves doesn't disturb us."</p><p class="quote-author">Stephen Mitchell</p></div>
+            </section>
+
+            <section id="contact">
+                <div class="section-title">Professional Contact</div>
+                <div class="contact-details">
+                    <p>Interested in discussing these clinical concepts further?</p>
+                    <p><strong>Email:</strong> <a href="mailto:clinical@example.com">clinical@example.com</a></p>
+                    <p><strong>Clinical Focus:</strong> Psychotherapy, Mentalization, & Relational Analysis</p>
+                    <p><a href="#">View Profile on Psychology Today</a></p>
                 </div>
             </section>
         </main>
     </div>
 
     <script>
-        // 1. Search Function
+        // Search
         function searchQuotes() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.quote-card');
@@ -490,64 +264,29 @@
             });
         }
 
-        // 2. Toggle Focus Mode (Dims background)
-        function toggleFocusMode() {
-            document.body.classList.toggle('focus-active');
-        }
-
-        // 3. Random Insight Generator
+        // Random Quote
         function randomWisdom() {
             let cards = document.querySelectorAll('.quote-card');
-            // Remove previous highlights
-            cards.forEach(c => c.classList.remove('highlight-card'));
-            
-            // Filter only visible cards (in case search is active)
-            let visibleCards = Array.from(cards).filter(c => c.style.display !== 'none');
-            
-            if(visibleCards.length > 0) {
-                let randomIndex = Math.floor(Math.random() * visibleCards.length);
-                let chosenCard = visibleCards[randomIndex];
-                
-                chosenCard.scrollIntoView({behavior: "smooth", block: "center"});
-                chosenCard.classList.add('highlight-card');
-                
-                // Remove highlight class after animation
-                setTimeout(() => {
-                    chosenCard.classList.remove('highlight-card');
-                }, 2000);
-            }
+            let randomIndex = Math.floor(Math.random() * cards.length);
+            cards[randomIndex].scrollIntoView({behavior: "smooth", block: "center"});
+            cards[randomIndex].style.backgroundColor = "rgba(255, 215, 0, 0.2)";
+            setTimeout(() => { cards[randomIndex].style.backgroundColor = ""; }, 2000);
         }
 
-        // 4. Copy to Clipboard
-        function copyToClipboard(button) {
-            let card = button.parentElement;
-            let text = card.querySelector('.quote-text').innerText;
-            let author = card.querySelector('.quote-author').innerText;
-            let fullQuote = `${text} — ${author}`;
-
-            navigator.clipboard.writeText(fullQuote).then(() => {
-                let tooltip = button.nextElementSibling;
-                tooltip.style.opacity = "1";
-                setTimeout(() => { tooltip.style.opacity = "0"; }, 2000);
-            });
-        }
-
-        // 5. Scroll Spy (Sidebar Highlight)
+        // Sidebar Highlight
         window.addEventListener('scroll', () => {
             let sections = document.querySelectorAll('section');
             let navLinks = document.querySelectorAll('nav a');
-            
             sections.forEach(sec => {
                 let top = window.scrollY;
-                let offset = sec.offsetTop - 200;
+                let offset = sec.offsetTop - 150;
                 let height = sec.offsetHeight;
                 let id = sec.getAttribute('id');
-
                 if(top >= offset && top < offset + height) {
-                    navLinks.forEach(links => {
-                        links.classList.remove('active');
-                        let activeLink = document.querySelector('nav a[href*=' + id + ']');
-                        if(activeLink) activeLink.classList.add('active');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        let target = document.querySelector('nav a[href*=' + id + ']');
+                        if(target) target.classList.add('active');
                     });
                 }
             });
